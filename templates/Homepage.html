@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 style="text-align:center">Build a Blog</h1><br>
+
+    {% if blogs|length == 0 %}
+    <p>No Blogs yet</p>
+    {% else %}
+
+            {% for blog in blogs %}
+            <table frame="below" width="100%">
+                <tr><h2 style="font-family:Cambria">{{blog.name}}</h2></tr><br>
+                <tr><td>{{blog.body}}</td></tr>
+            </table>
+            {% endfor %}
+
+    {% endif %}
+
+    
+
+{% endblock %}
