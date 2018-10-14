@@ -31,7 +31,7 @@ def index():
     else:
         yourblog = Blog.query.filter_by(id=name).first()
 
-        return render_template('Myblog.html', Btitle = yourblog.name, your_blog= yourblog.body)
+        return render_template('Myblog.html', title= yourblog.name, Btitle = yourblog.name, your_blog= yourblog.body)
 
     
 
@@ -45,9 +45,9 @@ def newpost():
         blog_body = request.form['blog']
         
         if not blog_name:
-            return render_template('Postentry.html', title_error="Please insert a title", blog= blog_body)
+            return render_template('Postentry.html', title="Add a Blog Entry", title_error="Please insert a title", blog= blog_body)
         if not blog_body:
-            return render_template('Postentry.html', blog_error="Please insert a blog", blog_title= blog_name)
+            return render_template('Postentry.html', title="Add a Blog Entry", blog_error="Please insert a blog", blog_title= blog_name)
         else:
 
             new_blog = Blog(blog_name,blog_body)
