@@ -9,10 +9,12 @@
     {% else %}
 
             {% for blog in blogs %}
-            <table frame="below" width="100%">
-                <tr><h2 style="font-family:Cambria">{{blog.name}}</h2></tr><br>
+            <form action="/blogger_page" methods="POST">
+            <table frame="below" width="100%" style="font-family:Cambria">
+                <tr><h2><a href="/blog?id={{blog.id}}">{{blog.name}}</a></h2></tr><br>
                 <tr><td>{{blog.body}}</td></tr>
             </table>
+            </form>
             {% endfor %}
 
     {% endif %}
