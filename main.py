@@ -26,7 +26,7 @@ def index():
     name = request.args.get('id')
     if not name:
         blogs = Blog.query.all()
-        return render_template('Homepage.html',title="Buid a blog", blogs=blogs)
+        return render_template('Homepage.html',title="Build a blog", blogs=blogs)
     
     else:
         yourblog = Blog.query.filter_by(id=name).first()
