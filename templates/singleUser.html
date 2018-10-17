@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 style="text-align:center" name="writer">{{writer}}</h1><br>
+
+    {% if cases|length == 0 %}
+    <p>No Blogs yet</p>
+    {% else %}
+
+            {% for case in cases %}
+            <form action="/blog" methods="POST">
+            <table frame="below" width="100%" style="font-family:Cambria">
+                <tr><h2>>{{case.title}}</h2></tr><br>
+                <tr><td>{{case.body}}</td></tr>
+            </table>
+            </form>
+            {% endfor %}
+
+    {% endif %}
+
+
+
+
+
+{% endblock %}

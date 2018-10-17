@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 style="text-align:center">Blogz</h1><br>
+
+    {% if authors|length == 0 %}
+    <p>No Blogs yet</p>
+    {% else %}
+
+            {% for author in authors %}
+            <form action="/blog" methods="POST">
+            <ul style="font-family:Cambria">
+                <li><a href="/blog?username={{author.username}}">{{author.username}}</a></li>
+            </ul>
+            </form>
+            {% endfor %}
+
+
+
+
+{% endblock %}
