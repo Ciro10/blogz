@@ -10,7 +10,7 @@
             {% for case in cases %}
             <form action="/blog" methods="POST">
             <table frame="below" width="100%" style="font-family:Cambria">
-                <tr><h2>>{{case.title}}</h2></tr><br>
+                <tr><h2><a href="/blog?post={{case.title}}">{{case.title}}</a></h2></tr><br>
                 <tr><td>{{case.body}}</td></tr>
             </table>
             </form>

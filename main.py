@@ -14,7 +14,7 @@ class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50))
     body = db.Column(db.String(500))
-    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    owner_id = db.Column(db.String(20), db.ForeignKey('user.username'))
 
     def __init__(self, title, body, user):
         self.title = title
@@ -37,9 +37,9 @@ class User(db.Model):
 
 @app.before_request
 def require_login():
-    allowed_routes = ['Login','signup','blog','static']
-    if request.endpoint not in allowed_routes and 'username' not in session:
-        return redirect('/signup')
+    allowed_routes = ['/login','/signup','/blog','/','/logout']
+    if request.path not in allowed_routes and 'username' not in session:
+        return redirect('/login')
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -56,24 +56,30 @@ def Posts():
 
     name = request.args.get('id')
     blogger = request.args.get('username')
-    if not name and not blogger:
+    post = request.args.get('post')
+
+    if not name and not blogger and not post:
         blogs = Blog.query.all()
         
 
         return render_template('Allposts.html',title="Blogz", blogs=blogs)
 
     if blogger:
-        #cases = Blog.query.filter_by(user= blogger).all()
-        #agent = User.query.filter_by(id = blogger).first()
-        cases = User.query.filter_by(Posts=blogger).all()
 
+        cases = Blog.query.filter_by(owner_id= blogger).all()
+       
         return render_template('singleUser.html', title= blogger, writer= blogger, cases= cases)
     
-    else:
-        yourblog = Blog.query.filter_by(owner_id=name).first()
-        author_name = User.query.filter_by(id=name).first()
+    if post:
 
-        return render_template('Myblog.html', title= author_name.username, Btitle = yourblog.title, your_blog= yourblog.body)
+        story= Blog.query.filter_by(title= post).first()
+        return render_template('Myblog.html', title= post, Btitle= story.title, your_blog= story.body, blogger= story.owner_id)
+    
+    else:
+        
+        Postings = Blog.query.filter_by(owner_id=name).first()
+        author_name = User.query.filter_by(username=name).first()
+        return render_template('Myblog.html', title= name, Btitle = Postings.title, your_blog= Postings.body)
 
     
 
@@ -97,9 +103,9 @@ def newpost():
             db.session.add(new_blog)
             db.session.commit()
  
-            
+           
    
-            return redirect('/blog?id={}'.format(user.id))
+            return redirect('/blog?id={}'.format(user.username))
 
     return render_template('Postentry.html',title="Add a Blog Entry")
 
@@ -108,7 +114,7 @@ def newpost():
 def login():
     if request.method == 'POST':
         username = request.form['username']
-        password = request.form['password']
+        passcode = request.form['password']
 
         user = User.query.filter_by(username= username).first()
 
@@ -131,7 +137,7 @@ def login():
             return render_template('login.html', title= 'Blogz-login', password_error="Passwords have no spaces please", username= username)
 
         else:
-            if user and user.password == password:
+            if user and user.password == passcode:
                 session['username'] = username
            
                 return redirect('/newpost')
@@ -142,17 +148,14 @@ def login():
     return render_template('login.html', title= 'Blogz-login')
 
 
-@app.route("/signup")
-def user_signup():
-
+@app.route("/signup", methods=['POST', 'GET'])
+def signup():
 
     if request.method == 'POST':
 
         username= request.form['username']
         passcode= request.form['password']
         recode= request.form['re_password']
-
-        existing_user = User.query.filter_by(username= username).first()
 
         
 
@@ -188,8 +191,9 @@ def user_signup():
     
         else:
             
+            existing_user = User.query.filter_by(username= username).first()
             if not existing_user:
-                new_user = User(username,password)
+                new_user = User(username,passcode)
                 db.session.add(new_user)
                 db.session.commit()
                 session['username'] = username
@@ -198,14 +202,15 @@ def user_signup():
 
             return redirect('/newpost')
 
-    else:
+    #else:
 
-        return render_template('signup.html', title= 'Blogz-signup')
+    return render_template('signup.html', title= 'Blogz-signup')
 
 
-@app.route('/logout', methods=['POST'])
+@app.route('/logout', methods=['POST', 'GET'])
 def logout():
-    del session['email']
+    if session:
+        del session['username']
     return redirect('/')
 
 

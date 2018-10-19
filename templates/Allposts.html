@@ -11,9 +11,10 @@
             {% for blog in blogs %}
             <form action="/blog" methods="POST">
             <table frame="below" width="100%" style="font-family:Cambria">
-                <tr><h2>>{{blog.title}}</h2></tr><br>
-                <tr><td>{{blog.body}}</td></tr><br>
-                <tr><h5 name="blogger">posted by:<a href="/blog?username={{blog.user}}">{{blog.user}}</a></h5></tr>
+                <tr><h2><a href="/blog?post={{blog.title}}">{{blog.title}}</h2></a></h2></tr>
+                <tr><td>{{blog.body}}</td></tr><br><br>
+                <tr><td></td></tr>
+                <tr><td name="blogger">posted by:<a href="/blog?username={{blog.owner_id}}">{{blog.owner_id}}</a></td></tr>
             </table>
             </form>
             {% endfor %}
