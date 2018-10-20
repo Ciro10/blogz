@@ -13,7 +13,7 @@ class Blog(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50))
-    body = db.Column(db.String(500))
+    body = db.Column(db.String(5000))
     owner_id = db.Column(db.String(20), db.ForeignKey('user.username'))
 
     def __init__(self, title, body, user):
@@ -105,7 +105,7 @@ def newpost():
  
            
    
-            return redirect('/blog?id={}'.format(user.username))
+            return redirect('/blog?post={}'.format(blog_name))
 
     return render_template('Postentry.html',title="Add a Blog Entry")
 
