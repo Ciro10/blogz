@@ -1,20 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-    <h1 style="text-align:center">Add a Blog Entry</h1>
-    <form actions="/newpost" method='post'>
-        <label style="font-size: large">
-            Title for your new blog:<br>
-            <input  type="text" name="blog_title" value="{{blog_title}}"/>
-        </label><br><br>
-        <p name="title_error" style="color: red">{{title_error}}</p>
-        <label style="font-size: large">
-            Your new blog:<br>
-            <textarea name="blog" rows="10" cols="25">{{blog}}</textarea>
-        </label>
-        <p name="blog_error" style="color: red">{{blog_error}}</p><br><br>
-        <input type="submit" value='Add Entry' />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Patua+One|Didact+Gothic">
+    <h1 style="text-align:center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 50px; color: grey">Add a Blog Entry</h1>
+    <form class="form-horizontal" actions="/newpost" method='post' style="position:relative">
+        <div class="form-group">
+        <label class="control-label col-sm-2" style="font-family:Didact Gothic; font-size: large; color: gainsboro; margin-left: 180px">
+            Title for your new blog:</label><br><br>
+        <div class="col-sm-8">
+            <input  class="form-control" style="background-color:rgb(197, 194, 194); margin-left: 205px; border-radius: 5px" type="text" name="blog_title" value="{{blog_title}}"/>
+        </div>
+        </div>
+            <p name="title_error" style="color: red; margin-left: 200px">{{title_error}}</p>
+        <label style="font-size: large; font-family:Didact Gothic; color: gainsboro; margin-left: 210px">
+            Your new blog:</label><br>
+            <textarea style="background-color:rgb(197, 194, 194); margin-left:200px; border-radius: 10px" name="blog" rows="13" cols="127">{{blog}}</textarea>
+        <p name="blog_error" style="color: red; margin-left: 200px">{{blog_error}}</p>
+        <div class="form-group"> 
+                <div class="col-sm-offset-5 col-sm-8">
+        <button class="btn btn-default" style="margin-left:20px; background-color:rgb(48, 48, 124); color: gainsboro" type="submit">Add Entry</button>
+        </div>
+        </div>
     </form>
 
     

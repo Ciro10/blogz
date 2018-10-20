@@ -1,8 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Patua+One|Barlow+Condensed">
+<style>
+    
+    .head {
+        color: grey;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 100px;
+    }
+</style>
 
-<h1 style="text-align:center">Blogz</h1><br>
+<h1 style="text-align:center" class="head">Blogz</h1><br>
 
     {% if authors|length == 0 %}
     <p>No Blogs yet</p>
@@ -10,8 +19,8 @@
 
             {% for author in authors %}
             <form action="/blog" methods="POST">
-            <ul style="font-family:Cambria">
-                <li><a href="/blog?username={{author.username}}">{{author.username}}</a></li>
+            <ul style="font-family:Barlow Condensed; font-size: 40px; margin-left: 40px">
+                <li class="active"><a href="/blog?username={{author.username}}">{{author.username}}</a></li>
             </ul>
             </form>
             {% endfor %}

@@ -1,23 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Patua+One|Didact+Gothic">
 <style>
     .error { color: red; }
 
 </style>
 
-<form action="/login" method="post">
-    <h1>User Login</h1>
-    <label>Username
-        <input name="username" type="text" style="margin-left: 60px;" value="{{username}}"/>
-    </label>
-    <p class="error" name="username_error">{{username_error}}</p>
-    <label>Password
-        <input name="password" type="password" style="margin-left: 64px;"/>
-    </label>
-    <p class="error">{{password_error}}</p>
-    <input type="submit" value="Sign-in"/>
-    <p>Don't have an account? <a href="/signup">Create one</a></p>
+<form class="form-horizontal" action="/login" method="post">
+    <h1 style="margin-left:235px; color: gainsboro; font-family: Didact Gothic">User Login</h1><br><br>
+    <div class="form-group">
+        <label class="control-label col-sm-2" style="color:gainsboro; font-family: Didact Gothic">Username</label>
+    <div class="col-sm-4">
+        <input class="form-control" name="username" style="background-color:rgb(163, 162, 162)"  type="text" value="{{username}}"/>
+    </div>
+    </div>
+    <p class="error" name="username_error" style="margin-left:230px">{{username_error}}</p>
+    <div class="form-group">
+    <label class="control-label col-sm-2" style="color:gainsboro; font-family: Didact Gothic">Password</label>
+    <div class="col-sm-4">
+        <input name="password" class="form-control" type="password" style="background-color:rgb(163, 162, 162)" />
+    </div>
+    </div>
+    <p class="error" style="margin-left:230px">{{password_error}}</p>
+    <div class="form-group"> 
+            <div class="col-sm-offset-2 col-sm-10">
+    <button type="submit" class="btn btn-default" style="background-color:rgb(48, 48, 124); color: gainsboro">Sign-in</button>
+    </div>
+    </div>
+    <p style="margin-left:235px; color: gainsboro">Don't have an account? <a href="/signup">Create one</a></p>
 </form>
 
 

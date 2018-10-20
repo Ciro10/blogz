@@ -3,11 +3,29 @@
     <head>
         <link rel="icon" href="https://pbs.twimg.com/profile_images/1012810359684493312/lUr-Uls5_400x400.jpg">
         <title>{{title}}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+            .nav>li>a:hover { background-color: grey;}
+        </style>
+
     </head>
-<body>
-    <div style="display: inline">
-        <h4><a href="http://localhost:5000/">HOME</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://localhost:5000/blog">ALL POSTS</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://localhost:5000/newpost">NEW POST</a></h4>
-        <h4 style="text-align:right"><a href="http://localhost:5000/login">LOGIN</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://localhost:5000/logout">LOGOUT</a></h4>
+<body style="background-image: url(https://blogknock.com/wp-content/uploads/2018/05/imageedit_3_7254420053.png); background-size: cover; background-attachment: fixed; position:absolute">
+    
+    <div style="display: inline" class="container">
+        <ul class="nav nav-pills nav-justified">
+            <li><a href="http://localhost:5000/">HOME</a></li>
+            <li><a href="http://localhost:5000/blog">ALL POSTS</a></li>
+            <li><a href="http://localhost:5000/newpost">NEW POST</a></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li><a href="http://localhost:5000/login">LOGIN</a></li>
+            <li><a href="http://localhost:5000/logout">LOGOUT</a></li>
+        </ul>
     </div>
 
     {% block content %}
